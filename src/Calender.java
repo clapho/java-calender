@@ -19,22 +19,28 @@ public class Calender {
     }
 
     public static void main(String[] args) {
+        String PROMPT = "cal>";
         Calender cal = new Calender();
         Scanner s = new Scanner(System.in);
-        System.out.println("반복횟수를 입력하세요.");
-        int repeat = s.nextInt();
+        System.out.print(PROMPT);
+
         System.out.println("달을 입력하세요.");
-
-        int[] monthArr = new int[repeat];
-        for(int i = 0; i < repeat; i++) {
+        while(true) {
+            System.out.print(PROMPT);
             int month = s.nextInt();
-            monthArr[i] = month;
+            if(month == -1) {
+                break;
+            }
+
+            if(month > 12 || month < 1) {
+                continue;
+            }
+
+            System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getMaxDaysOfMonth(month));
         }
 
-        for(int i = 0; i < repeat; i++) {
-            System.out.printf("%d월은 %d일까지 있습니다.\n", monthArr[i], cal.getMaxDaysOfMonth(monthArr[i]));
-        }
 
+        System.out.println("Have a nice day!");
         s.close();
     }
 }
