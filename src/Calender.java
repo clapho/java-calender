@@ -20,11 +20,21 @@ public class Calender {
 
     public static void main(String[] args) {
         Calender cal = new Calender();
-        System.out.println("달을 입력하세요.");
         Scanner s = new Scanner(System.in);
-        int month = s.nextInt();
+        System.out.println("반복횟수를 입력하세요.");
+        int repeat = s.nextInt();
+        System.out.println("달을 입력하세요.");
 
-        System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getMaxDaysOfMonth(month));
+        int[] monthArr = new int[repeat];
+        for(int i = 0; i < repeat; i++) {
+            int month = s.nextInt();
+            monthArr[i] = month;
+        }
+
+        for(int i = 0; i < repeat; i++) {
+            System.out.printf("%d월은 %d일까지 있습니다.\n", monthArr[i], cal.getMaxDaysOfMonth(monthArr[i]));
+        }
+
         s.close();
     }
 }
