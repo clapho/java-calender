@@ -1,8 +1,33 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Calender {
     private static final int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private static final int[] LEAF_MAX_DAYS = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    private HashMap<Date, String> planMap;
+
+    public Calender() {
+        planMap = new HashMap<Date, String>();
+    }
+
+    /**
+     *
+     * @param strDate ex: "2023-06-18"
+     * @param plan
+     * @throws ParseException
+     */
+    public void registerPlan(String strDate, String plan) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+        planMap.put(date, plan);
+    }
+
+    public String searchPlan(String strDate) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+        String plan = planMap.get(date);
+        return plan;
+    }
 
     public boolean isLeafYear(int year) {
         if(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
@@ -26,7 +51,7 @@ public class Calender {
             monthDays += getMaxDaysOfMonth(year, i);
         }
 
-        return yearDays + monthDays; // (+1) 1일기준 인덱스
+        return yearDays + monthDays;
     }
 
     public void printCalender(int year, int month) {
